@@ -1,13 +1,14 @@
 'use strict';//strict（厳格）モード
+const memo = new Map(); //memoにnewMapとして設定
+memo.set(0,0); //nが0の時0を返す
+memo.set(1,1); //nが1の時1を返す
 function fib(n){ //fib関数の宣言
-  if(n === 0){　//nが0の時
-    return 0; //返り値　0を返す
-  }else if(n === 1){//nが1の時
-    return 1;//返り値　1を返す
+  if(memo.has(n)){　
+    return memo.get(n);
   }
-  //return null;  旧：返り値//0以外の値の場合はnullを返し終了
-  return fib (n - 1) + fib(n - 2);
-  //0と1以外の時、前と前の前のフィボナッチ数を足し合わせた数を返す
+  const value=fib(n-1)+fib(n-2);
+  memo.set(n,value);
+  return value;
 }
 
 const length =40;　//40回繰り返しを宣言
